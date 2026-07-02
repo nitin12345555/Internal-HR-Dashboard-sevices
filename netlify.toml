@@ -1,0 +1,9 @@
+[build]
+  # Yeh Netlify ko batata hai ki aapki serverless functions 'api' folder mein hain.
+  functions = "api/"
+
+[[redirects]]
+  # Yeh rule /api/* se aane wali sabhi requests ko aapke function par bhej dega.
+  from = "/api/*"
+  to = "/.netlify/functions/index"
+  status = 200
