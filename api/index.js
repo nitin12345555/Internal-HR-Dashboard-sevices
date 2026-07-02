@@ -10,7 +10,7 @@ module.exports = (req, res) => {
     res.status(200).end();
     return;
   }
-  const dbPath = path.join(__dirname, '..', 'db.json');
+  const dbPath = path.join(process.cwd(), 'db.json');
   const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
 
 
