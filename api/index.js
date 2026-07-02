@@ -83,6 +83,7 @@ const requestHandler = (req, res) => {
           break;
         case "GET":
           return handleGet(req, res, db, url);
+          break; // Add this break statement
       }
       // Fallback for unhandled methods/routes
       res.statusCode = 404;
