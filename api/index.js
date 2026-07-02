@@ -22,6 +22,17 @@ const handleLogin = (req, res, db, body) => {
 };
 
 const handleGet = (req, res, db, url) => {
+  // Add a specific handler for the stats route
+  if (url.pathname === "/dashboard/stats") {
+    const stats = {
+      totalJobs: db.jobs?.length || 0,
+      totalUsers: db.users?.length || 0,
+      // You can add more stats here later (e.g., total candidates)
+    };
+    res.statusCode = 200;
+    return res.end(JSON.stringify(stats));
+  }
+
   const pathSegments = url.pathname.split("/").filter(Boolean);
   const resource = pathSegments[1];
   const id = pathSegments[2];
