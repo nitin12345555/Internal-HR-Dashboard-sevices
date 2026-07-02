@@ -14,10 +14,14 @@ module.exports = (req, res) => {
   const db = JSON.parse(fs.readFileSync(dbPath, 'utf8'));
 
 
-  const urlParts = req.url.split('/').filter(part => part);
-  const resource = urlParts[1]; 
-  const id = urlParts[2]; 
+  // Use the URL constructor for robust parsing.
+  // The base URL is required but doesn't matter since we only need the pathname.
+  const url = new URL(req.url, `http://${req.headers.host}`);
+  // pathname for '/api/jobs/1' will be '/api/jobs/1'
+  const pathSegments = url.pathname.split('/').filter(Boolean); // ['api', 'jobs', '1']
 
+  const resource = pathSegments[1]; // 'jobs'
+  const id = pathSegments[2];       // '1'
   res.setHeader('Content-Type', 'application/json');
 
   if (db[resource]) {
