@@ -24,6 +24,7 @@ module.exports = (req, res) => {
   if (db[resource]) {
     if (id) {
       const item = db[resource].find((item) => item.id == id);
+
       res.statusCode = item ? 200 : 404;
       return res.end(JSON.stringify(item || { message: "Not found" }));
     }
