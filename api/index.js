@@ -21,6 +21,16 @@ module.exports = (req, res) => {
   const resource = pathSegments[1];
   const id = pathSegments[2];
 
+  // Handle root URL request
+  if (!resource) {
+    res.statusCode = 200;
+    return res.end(
+      JSON.stringify({
+        message: "Mock API is running 🚀",
+      })
+    );
+  }
+
   if (db[resource]) {
     if (id) {
       const item = db[resource].find((item) => item.id == id);
