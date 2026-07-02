@@ -73,7 +73,7 @@ const requestHandler = (req, res) => {
 
   req.on("end", () => {
     try {
-      const dbPath = path.join(process.cwd(), "db.json");
+      const dbPath = path.join(__dirname, "..", "db.json");
       const db = JSON.parse(fs.readFileSync(dbPath, "utf8"));
       const url = new URL(req.url, "http://localhost");
 
