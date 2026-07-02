@@ -48,5 +48,20 @@
       "email": "nitin@gmail.com",
       "password": "1234567"
     }
-  ]
+  ],
+  "stats": {
+    "totalEmployees": 150,
+    "activeJobs": 8,
+    "recentHires": 12,
+    "departmentBreakdown": {
+      "engineering": 45,
+      "sales": 30,
+      "hr": 15,
+      "operations": 25,
+      "marketing": 20,
+      "other": 15
+    },
+    "avgSalary": 5.2,
+    "retention": 92.5
+  }
 }
