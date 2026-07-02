@@ -64,4 +64,9 @@
     "avgSalary": 5.2,
     "retention": 92.5
   }
+,
+  "employees": [
+    { "id": 1, "name": "Nitin Jangid", "department": "Engineering", "role": "Frontend Developer" },
+    { "id": 2, "name": "Rahul Sharma", "department": "Operations", "role": "Executive" }
+  ]
 }

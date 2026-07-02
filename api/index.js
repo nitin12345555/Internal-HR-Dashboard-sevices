@@ -22,24 +22,26 @@ const handleLogin = (req, res, db, body) => {
 };
 
 const handleGet = (req, res, db, url) => {
-  // First, check for specific, hardcoded routes
+  // 1. Sabse pehle strict exact route check karein (Jaise stats ke liye)
   if (url.pathname === "/dashboard/stats") {
-    const stats = db.stats;
     res.statusCode = 200;
-    return res.end(JSON.stringify(stats));
+    return res.end(JSON.stringify(db.stats));
   }
 
-  // Then, handle generic /api/{resource}/{id} routes
+  // 2. Pure URL path ko split karein
   const pathSegments = url.pathname.split("/").filter(Boolean);
-  const resource = pathSegments[1];
-  const id = pathSegments[2];
 
-  if (!resource) {
-    res.statusCode = 200;
-    return res.end(JSON.stringify({ message: "Mock API is running 🚀" }));
+  let resource = pathSegments[0];
+  let id = pathSegments[1];
+
+  // Agar URL me pehla word 'api' hai (e.g., /api/jobs), toh ek step aage badhein
+  if (resource === "api") {
+    resource = pathSegments[1];
+    id = pathSegments[2];
   }
 
-  if (db[resource]) {
+  // 3. Check karein ki kya ye resource db.json me exist karta hai
+  if (resource && db[resource]) {
     if (id) {
       const item = db[resource].find((item) => item.id == id);
       res.statusCode = item ? 200 : 404;
@@ -49,7 +51,7 @@ const handleGet = (req, res, db, url) => {
     return res.end(JSON.stringify(db[resource]));
   }
 
-  // Fallback for unknown GET routes
+  // Fallback agar kuch bhi match nahi hua
   res.statusCode = 404;
   res.end(JSON.stringify({ message: "Resource not found" }));
 };
