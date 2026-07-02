@@ -1,0 +1,45 @@
+{
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Frontend Developer",
+      "company": "Predusk Technology Pvt. Ltd. (Brand name: ProcessVenue & Predusk AI)",
+      "location": "WFO | (On-site) Jaipur, Rajasthan",
+      "experience": "2-5 Years",
+      "ctc": "Up to 6 LPA",
+      "type": "Full Time",
+      "education": "Bachelor’s degree in computer science, Design, Engineering, or a related field.",
+      "department": "Technology / Product Development",
+      "reportsTo": "Engineering - Product Manager",
+      "aboutRole": "We are looking for a passionate and creative Frontend Software Engineer with 2–5 years of experience in web design and modern frontend technologies. You will collaborate closely with designers, product managers, and backend engineers to craft responsive, user-centric web applications that are visually appealing and functionally robust.",
+      "keyResponsibilities": [
+        "Convert UI/UX designs and wireframes into high-quality, scalable frontend code",
+        "Build interactive, responsive web pages and components using HTML5, CSS3, JavaScript, and modern frameworks like Next.Js, React, Vue, or Angular",
+        "Optimize components for performance, accessibility, and cross-browser compatibility",
+        "Work with design and product teams to implement clean, user-friendly interfaces",
+        "Participate in code reviews, agile sprints, and product planning",
+        "Collaborate with backend teams to integrate APIs and ensure seamless data flow",
+        "Identify UI/UX problems and devise elegant solutions through iteration and testing",
+        "Stay up to date with emerging technologies and best practices in frontend and UX design"
+      ],
+      "requiredSkills": [
+        "2–5 years of hands-on experience in frontend development.",
+        "Strong proficiency in HTML, CSS, JavaScript (ES6+)",
+        "Handson Experience in Website Development",
+        "Experience with React.js, Next.js, Vue.js, or other component-based frameworks",
+        "Familiarity with Figma, Adobe XD, or similar design collaboration tools",
+        "Understanding of responsive design, mobile-first principles, and cross-browser testing",
+        "Ability to translate designs into pixel-perfect, accessible, semantic HTML/CSS",
+        "Basic knowledge of REST APIs and asynchronous data handling (e.g., Fetch, Axios)",
+        "Familiar with version control systems like Git"
+      ],
+      "preferredSkills": [
+        "Experience with TypeScript",
+        "Exposure to design systems or component libraries (e.g., Material UI, TailwindCSS)",
+        "Animation experience using Framer Motion or GSAP",
+        "Understanding of Web Vitals, Lighthouse, and performance profiling",
+        "Prior experience in agile or startup environments"
+      ]
+    }
+  ]
+}
