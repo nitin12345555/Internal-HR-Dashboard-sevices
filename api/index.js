@@ -16,7 +16,7 @@ module.exports = (req, res) => {
 
   // Use the URL constructor for robust parsing.
   // The base URL is required but doesn't matter since we only need the pathname.
-  const url = new URL(req.url, `http://${req.headers.host}`);
+  const url = new URL(req.url, 'http://localhost');
   // pathname for '/api/jobs/1' will be '/api/jobs/1'
   const pathSegments = url.pathname.split('/').filter(Boolean); // ['api', 'jobs', '1']
 
