@@ -1,7 +1,7 @@
 const http = require('http');
 const handler = require('./api/index.js');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 
 const server = http.createServer(handler);
 
