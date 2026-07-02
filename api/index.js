@@ -26,7 +26,7 @@ module.exports = (req, res) => {
     res.statusCode = 200;
     return res.end(
       JSON.stringify({
-        message: "Mock API is running 🚀",
+        message: "Mock API is running",
       })
     );
   }
