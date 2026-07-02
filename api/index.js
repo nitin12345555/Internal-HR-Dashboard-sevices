@@ -22,17 +22,14 @@ const handleLogin = (req, res, db, body) => {
 };
 
 const handleGet = (req, res, db, url) => {
-  // Add a specific handler for the stats route
+  // First, check for specific, hardcoded routes
   if (url.pathname === "/dashboard/stats") {
-    const stats = {
-      totalJobs: db.jobs?.length || 0,
-      totalUsers: db.users?.length || 0,
-      // You can add more stats here later (e.g., total candidates)
-    };
+    const stats = db.stats;
     res.statusCode = 200;
     return res.end(JSON.stringify(stats));
   }
 
+  // Then, handle generic /api/{resource}/{id} routes
   const pathSegments = url.pathname.split("/").filter(Boolean);
   const resource = pathSegments[1];
   const id = pathSegments[2];
