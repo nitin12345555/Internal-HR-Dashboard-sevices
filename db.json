@@ -41,5 +41,12 @@
         "Prior experience in agile or startup environments"
       ]
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "nitin@gmail.com",
+      "password": "1234567"
+    }
   ]
 }
