@@ -1,99 +1,75 @@
+const express = require("express");
+const fs = require("fs").promises;
 const path = require("path");
-const fs = require("fs");
 
-const handleLogin = (req, res, db, body) => {
-  try {
-    const { email, password } = JSON.parse(body);
-    const user = db.users.find(
-      (u) => u.email === email && u.password === password
-    );
+const router = express.Router();
+const dbPath = path.join(__dirname, "..", "db.json");
 
-    if (user) {
-      res.statusCode = 200;
-      res.end(JSON.stringify({ token: "mock-jwt-token-for-testing" }));
-    } else {
-      res.statusCode = 401; // Unauthorized
-      res.end(JSON.stringify({ message: "Invalid credentials" }));
-    }
-  } catch (error) {
-    res.statusCode = 400; // Bad Request
-    res.end(JSON.stringify({ message: "Invalid JSON in request body" }));
-  }
+// Helper to read DB
+const readDb = async () => {
+  const dbRaw = await fs.readFile(dbPath, "utf8");
+  return JSON.parse(dbRaw);
 };
 
-const handleGet = (req, res, db, url) => {
-  // 1. Sabse pehle strict exact route check karein (Jaise stats ke liye)
-  if (url.pathname === "/dashboard/stats") {
-    res.statusCode = 200;
-    return res.end(JSON.stringify(db.stats));
-  }
+// GET /api/tasks - Paginated list of tasks
+router.get("/tasks", async (req, res) => {
+  const { tasks } = await readDb();
+  const page = parseInt(req.query.page, 10) || 1;
+  const pageSize = parseInt(req.query.pageSize, 10) || 10;
 
-  // 2. Pure URL path ko split karein
-  const pathSegments = url.pathname.split("/").filter(Boolean);
+  const total = tasks.length;
+  const items = tasks.slice((page - 1) * pageSize, page * pageSize);
 
-  let resource = pathSegments[0];
-  let id = pathSegments[1];
-
-  // Agar URL me pehla word 'api' hai (e.g., /api/jobs), toh ek step aage badhein
-  if (resource === "api") {
-    resource = pathSegments[1];
-    id = pathSegments[2];
-  }
-
-  // 3. Check karein ki kya ye resource db.json me exist karta hai
-  if (resource && db[resource]) {
-    if (id) {
-      const item = db[resource].find((item) => item.id == id);
-      res.statusCode = item ? 200 : 404;
-      return res.end(JSON.stringify(item || { message: "Not found" }));
-    }
-    res.statusCode = 200;
-    return res.end(JSON.stringify(db[resource]));
-  }
-
-  // Fallback agar kuch bhi match nahi hua
-  res.statusCode = 404;
-  res.end(JSON.stringify({ message: "Resource not found" }));
-};
-
-const requestHandler = (req, res) => {
-  // --- Set CORS and Content-Type Headers ---
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-  res.setHeader("Content-Type", "application/json");
-
-  if (req.method === "OPTIONS") {
-    res.statusCode = 200;
-    return res.end();
-  }
-
-  let body = "";
-  req.on("data", (chunk) => (body += chunk.toString()));
-
-  req.on("end", () => {
-    try {
-      const dbPath = path.join(__dirname, "..", "db.json");
-      const db = JSON.parse(fs.readFileSync(dbPath, "utf8"));
-      const url = new URL(req.url, "http://localhost");
-
-      switch (req.method) {
-        case "POST":
-          if (url.pathname === "/auth/login") return handleLogin(req, res, db, body);
-          break;
-        case "GET":
-          return handleGet(req, res, db, url);
-          break; // Add this break statement
-      }
-      // Fallback for unhandled methods/routes
-      res.statusCode = 404;
-      res.end(JSON.stringify({ message: "Route not found" }));
-    } catch (error) {
-      console.error("Server Error:", error);
-      res.statusCode = 500;
-      res.end(JSON.stringify({ message: "Internal Server Error" }));
-    }
+  res.json({
+    page,
+    pageSize,
+    total,
+    items,
   });
-};
+});
 
-module.exports = requestHandler;
+// GET /api/tasks/:id - Single task
+router.get("/tasks/:id", async (req, res) => {
+  const { tasks } = await readDb();
+  const task = tasks.find((t) => t.id === req.params.id);
+
+  if (task) {
+    res.json(task);
+  } else {
+    res.status(404).json({ message: "Task not found" });
+  }
+});
+
+// GET /api/tasks/:id/summary - SSE Streaming
+router.get("/tasks/:id/summary", (req, res) => {
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Connection", "keep-alive");
+  res.flushHeaders();
+
+  const summaryLines = [
+    "Analyzing task details...",
+    "Generating a concise summary of the task.",
+    "The task involves reviewing user feedback.",
+    "Key points include performance and UI.",
+    "Finalizing summary.",
+    "Done",
+  ];
+
+  let i = 0;
+  const intervalId = setInterval(() => {
+    if (i >= summaryLines.length) {
+      clearInterval(intervalId);
+      return res.end();
+    }
+    res.write(`data: ${summaryLines[i]}\n\n`);
+    i++;
+  }, 500);
+
+  req.on("close", () => {
+    clearInterval(intervalId);
+    res.end();
+  });
+});
+
+module.exports = router;

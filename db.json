@@ -1,72 +1,509 @@
 {
-  "jobs": [
+  "tasks": [
     {
-      "id": 1,
-      "title": "Frontend Developer",
-      "company": "Predusk Technology Pvt. Ltd. (Brand name: ProcessVenue & Predusk AI)",
-      "location": "WFO | (On-site) Jaipur, Rajasthan",
-      "experience": "2-5 Years",
-      "ctc": "Up to 6 LPA",
-      "type": "Full Time",
-      "education": "Bachelor’s degree in computer science, Design, Engineering, or a related field.",
-      "department": "Technology / Product Development",
-      "reportsTo": "Engineering - Product Manager",
-      "aboutRole": "We are looking for a passionate and creative Frontend Software Engineer with 2–5 years of experience in web design and modern frontend technologies. You will collaborate closely with designers, product managers, and backend engineers to craft responsive, user-centric web applications that are visually appealing and functionally robust.",
-      "keyResponsibilities": [
-        "Convert UI/UX designs and wireframes into high-quality, scalable frontend code",
-        "Build interactive, responsive web pages and components using HTML5, CSS3, JavaScript, and modern frameworks like Next.Js, React, Vue, or Angular",
-        "Optimize components for performance, accessibility, and cross-browser compatibility",
-        "Work with design and product teams to implement clean, user-friendly interfaces",
-        "Participate in code reviews, agile sprints, and product planning",
-        "Collaborate with backend teams to integrate APIs and ensure seamless data flow",
-        "Identify UI/UX problems and devise elegant solutions through iteration and testing",
-        "Stay up to date with emerging technologies and best practices in frontend and UX design"
-      ],
-      "requiredSkills": [
-        "2–5 years of hands-on experience in frontend development.",
-        "Strong proficiency in HTML, CSS, JavaScript (ES6+)",
-        "Handson Experience in Website Development",
-        "Experience with React.js, Next.js, Vue.js, or other component-based frameworks",
-        "Familiarity with Figma, Adobe XD, or similar design collaboration tools",
-        "Understanding of responsive design, mobile-first principles, and cross-browser testing",
-        "Ability to translate designs into pixel-perfect, accessible, semantic HTML/CSS",
-        "Basic knowledge of REST APIs and asynchronous data handling (e.g., Fetch, Axios)",
-        "Familiar with version control systems like Git"
-      ],
-      "preferredSkills": [
-        "Experience with TypeScript",
-        "Exposure to design systems or component libraries (e.g., Material UI, TailwindCSS)",
-        "Animation experience using Framer Motion or GSAP",
-        "Understanding of Web Vitals, Lighthouse, and performance profiling",
-        "Prior experience in agile or startup environments"
-      ]
+      "id": "t1",
+      "title": "Analyze customer feedback data",
+      "type": "text",
+      "status": "InProgress",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": "4",
+      "updatedAt": "2025-08-06T10:30:00Z",
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t2",
+      "title": "Review new user interface designs",
+      "type": "image",
+      "status": "Todo",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": 0,
+      "updatedAt": 1722940200000,
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t3",
+      "title": "Transcribe audio recording from meeting",
+      "type": "audio",
+      "status": "Done",
+      "assignee": { "id": "u3", "name": "Chloe" },
+      "annotationCount": "12",
+      "updatedAt": "2025-08-05T15:00:00Z",
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t4",
+      "title": "Verify machine learning model accuracy",
+      "type": "text",
+      "status": "InProgress",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": 7,
+      "updatedAt": 1722853800000,
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t5",
+      "title": "Tag objects in surveillance video",
+      "type": "video",
+      "status": "Todo",
+      "assignee": null,
+      "annotationCount": "0",
+      "updatedAt": "2025-08-04T09:00:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t6",
+      "title": "Categorize support tickets",
+      "type": "text",
+      "status": "Done",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": 25,
+      "updatedAt": "2025-08-03T18:45:00Z",
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t7",
+      "title": "Label medical images for diagnosis",
+      "type": "image",
+      "status": "InProgress",
+      "assignee": { "id": "u3", "name": "Chloe" },
+      "annotationCount": "8",
+      "updatedAt": 1722681000000,
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t8",
+      "title": "Proofread and edit document",
+      "type": "text",
+      "status": "Todo",
+      "assignee": null,
+      "annotationCount": 0,
+      "updatedAt": "2025-08-01T11:00:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t9",
+      "title": "Identify sentiment in social media posts",
+      "type": "text",
+      "status": "Done",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": "50",
+      "updatedAt": "2025-07-31T22:00:00Z",
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t10",
+      "title": "Check video content for compliance",
+      "type": "video",
+      "status": "InProgress",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": 3,
+      "updatedAt": 1722335400000,
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t11",
+      "title": "Finalize Q3 financial report",
+      "type": "text",
+      "status": "in_progress",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": "9",
+      "updatedAt": "2025-07-30T14:00:00Z",
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t12",
+      "title": "Design new mobile app icon",
+      "type": "image",
+      "status": "todo",
+      "assignee": null,
+      "annotationCount": 0,
+      "updatedAt": 1722249000000,
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t13",
+      "title": "Fix critical login bug",
+      "type": "text",
+      "status": "BLOCKED",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": "2",
+      "updatedAt": "2025-07-29T11:20:00Z",
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t14",
+      "title": "Write API documentation for v2",
+      "type": "text",
+      "status": "Done",
+      "assignee": { "id": "u3", "name": "Chloe" },
+      "annotationCount": 15,
+      "updatedAt": 1722162600000,
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t15",
+      "title": "Test new feature on staging server",
+      "type": "text",
+      "status": "QA",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": "5",
+      "updatedAt": "2025-07-28T16:00:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t16",
+      "title": "Deploy hotfix to production",
+      "type": "text",
+      "status": "InProgress",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": 1,
+      "updatedAt": 1722076200000,
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t17",
+      "title": "Review pull request #245",
+      "type": "text",
+      "status": "done",
+      "assignee": { "id": "u3", "name": "Chloe" },
+      "annotationCount": "3",
+      "updatedAt": "2025-07-27T10:00:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t18",
+      "title": "Onboard new marketing intern",
+      "type": "text",
+      "status": "Todo",
+      "assignee": null,
+      "annotationCount": 0,
+      "updatedAt": 1721989800000,
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t19",
+      "title": "Plan next development sprint",
+      "type": "text",
+      "status": "in_progress",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": "11",
+      "updatedAt": "2025-07-26T18:00:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t20",
+      "title": "Investigate server performance degradation",
+      "type": "text",
+      "status": "InProgress",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": 6,
+      "updatedAt": 1721903400000,
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t21",
+      "title": "Update project dependencies",
+      "type": "text",
+      "status": "done",
+      "assignee": { "id": "u3", "name": "Chloe" },
+      "annotationCount": "0",
+      "updatedAt": "2025-07-25T09:30:00Z",
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t22",
+      "title": "Create marketing assets for new campaign",
+      "type": "image",
+      "status": "todo",
+      "assignee": null,
+      "annotationCount": 0,
+      "updatedAt": 1721817000000,
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t23",
+      "title": "Record a demo video for the new feature",
+      "type": "video",
+      "status": "BLOCKED",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": "1",
+      "updatedAt": "2025-07-24T12:00:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t24",
+      "title": "Translate user guide to Spanish",
+      "type": "text",
+      "status": "InProgress",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": 33,
+      "updatedAt": 1721730600000,
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t25",
+      "title": "Optimize database queries for dashboard",
+      "type": "text",
+      "status": "QA",
+      "assignee": { "id": "u3", "name": "Chloe" },
+      "annotationCount": "18",
+      "updatedAt": "2025-07-23T15:45:00Z",
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t26",
+      "title": "Refactor legacy authentication module",
+      "type": "text",
+      "status": "in_progress",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": 4,
+      "updatedAt": 1721644200000,
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t27",
+      "title": "Set up CI/CD pipeline for the new microservice",
+      "type": "text",
+      "status": "Done",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": "0",
+      "updatedAt": "2025-07-22T11:00:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t28",
+      "title": "Analyze user engagement metrics from last month",
+      "type": "text",
+      "status": "Todo",
+      "assignee": null,
+      "annotationCount": 0,
+      "updatedAt": 1721557800000,
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t29",
+      "title": "Conduct user interviews for feedback",
+      "type": "audio",
+      "status": "in_progress",
+      "assignee": { "id": "u3", "name": "Chloe" },
+      "annotationCount": "7",
+      "updatedAt": "2025-07-21T13:15:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t30",
+      "title": "Prepare presentation for the client meeting",
+      "type": "text",
+      "status": "done",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": 2,
+      "updatedAt": 1721471400000,
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t31",
+      "title": "Review and merge branch 'feature/new-dashboard'",
+      "type": "text",
+      "status": "InProgress",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": "5",
+      "updatedAt": "2025-07-20T10:00:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t32",
+      "title": "Create a new set of icons for the settings page",
+      "type": "image",
+      "status": "Todo",
+      "assignee": null,
+      "annotationCount": 0,
+      "updatedAt": 1721385000000,
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t33",
+      "title": "Debug video playback issue on iOS",
+      "type": "video",
+      "status": "BLOCKED",
+      "assignee": { "id": "u3", "name": "Chloe" },
+      "annotationCount": "3",
+      "updatedAt": "2025-07-19T17:30:00Z",
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t34",
+      "title": "Write unit tests for the payment gateway integration",
+      "type": "text",
+      "status": "in_progress",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": 22,
+      "updatedAt": 1721298600000,
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t35",
+      "title": "Perform security audit on the main application",
+      "type": "text",
+      "status": "QA",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": "10",
+      "updatedAt": "2025-07-18T11:00:00Z",
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t36",
+      "title": "Update the terms of service document",
+      "type": "text",
+      "status": "Done",
+      "assignee": { "id": "u3", "name": "Chloe" },
+      "annotationCount": 1,
+      "updatedAt": 1721212200000,
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t37",
+      "title": "Design the user profile page",
+      "type": "image",
+      "status": "todo",
+      "assignee": null,
+      "annotationCount": "0",
+      "updatedAt": "2025-07-17T14:20:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t38",
+      "title": "Transcribe customer support call #8821",
+      "type": "audio",
+      "status": "InProgress",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": 8,
+      "updatedAt": 1721125800000,
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t39",
+      "title": "Resolve merge conflicts in the 'dev' branch",
+      "type": "text",
+      "status": "in_progress",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": "2",
+      "updatedAt": "2025-07-16T16:50:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t40",
+      "title": "Prepare the monthly newsletter draft",
+      "type": "text",
+      "status": "done",
+      "assignee": { "id": "u3", "name": "Chloe" },
+      "annotationCount": 0,
+      "updatedAt": 1721039400000,
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t41",
+      "title": "Evaluate new analytics tool",
+      "type": "text",
+      "status": "InProgress",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": "3",
+      "updatedAt": "2025-07-15T18:00:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t42",
+      "title": "Create a new database schema for user preferences",
+      "type": "text",
+      "status": "Todo",
+      "assignee": null,
+      "annotationCount": 0,
+      "updatedAt": 1720953000000,
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t43",
+      "title": "Fix styling issues on the pricing page",
+      "type": "image",
+      "status": "QA",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": "7",
+      "updatedAt": "2025-07-14T12:30:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t44",
+      "title": "Document the new video processing API",
+      "type": "video",
+      "status": "in_progress",
+      "assignee": { "id": "u3", "name": "Chloe" },
+      "annotationCount": 4,
+      "updatedAt": 1720866600000,
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t45",
+      "title": "Test email notification service",
+      "type": "text",
+      "status": "Done",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": "1",
+      "updatedAt": "2025-07-13T09:00:00Z",
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t46",
+      "title": "Research competitors' features",
+      "type": "text",
+      "status": "InProgress",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": 13,
+      "updatedAt": 1720780200000,
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t47",
+      "title": "Optimize image loading on the gallery page",
+      "type": "image",
+      "status": "BLOCKED",
+      "assignee": { "id": "u3", "name": "Chloe" },
+      "annotationCount": "2",
+      "updatedAt": "2025-07-12T14:00:00Z",
+      "meta": { "priority": "high" }
+    },
+    {
+      "id": "t48",
+      "title": "Add subtitles to the tutorial video",
+      "type": "video",
+      "status": "todo",
+      "assignee": null,
+      "annotationCount": 0,
+      "updatedAt": 1720693800000,
+      "meta": { "priority": "medium" }
+    },
+    {
+      "id": "t49",
+      "title": "Clean up old log files from the server",
+      "type": "text",
+      "status": "done",
+      "assignee": { "id": "u1", "name": "Nitin" },
+      "annotationCount": "0",
+      "updatedAt": "2025-07-11T23:50:00Z",
+      "meta": { "priority": "low" }
+    },
+    {
+      "id": "t50",
+      "title": "Prepare for the quarterly business review",
+      "type": "text",
+      "status": "in_progress",
+      "assignee": { "id": "u2", "name": "Ben" },
+      "annotationCount": 5,
+      "updatedAt": 1720607400000,
+      "meta": { "priority": "high" }
     }
   ],
   "users": [
-    {
-      "id": 1,
-      "email": "nitin@gmail.com",
-      "password": "1234567"
-    }
-  ],
-  "stats": {
-    "totalEmployees": 150,
-    "activeJobs": 8,
-    "recentHires": 12,
-    "departmentBreakdown": {
-      "engineering": 45,
-      "sales": 30,
-      "hr": 15,
-      "operations": 25,
-      "marketing": 20,
-      "other": 15
-    },
-    "avgSalary": 5.2,
-    "retention": 92.5
-  }
-,
-  "employees": [
-    { "id": 1, "name": "Nitin Jangid", "department": "Engineering", "role": "Frontend Developer" },
-    { "id": 2, "name": "Rahul Sharma", "department": "Operations", "role": "Executive" }
+    { "id": "u1", "name": "Nitin" },
+    { "id": "u2", "name": "Ben" },
+    { "id": "u3", "name": "Chloe" }
   ]
 }
