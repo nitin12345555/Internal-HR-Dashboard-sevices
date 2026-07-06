@@ -1,5 +1,7 @@
 const express = require("express");
 const http = require("http");
+const fs = require("fs").promises;
+const path = require("path");
 const { WebSocketServer } = require("ws");
 const cors = require("cors");
 const apiRoutes = require("./api");
@@ -8,6 +10,12 @@ const PORT = process.env.PORT || 4000;
 
 const app = express();
 const server = http.createServer(app);
+const dbPath = path.join(__dirname, "db.json");
+
+const readDb = async () => {
+  const dbRaw = await fs.readFile(dbPath, "utf8");
+  return JSON.parse(dbRaw);
+};
 
 // --- WebSocket Server Setup ---
 const wss = new WebSocketServer({ server, path: "/ws" });
@@ -59,6 +67,24 @@ app.get("/", (req, res) => {
 
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
+});
+
+app.get(["/employee", "/employees"], async (req, res) => {
+  try {
+    const { users } = await readDb();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to load employees" });
+  }
+});
+
+app.get(["/api/employee", "/api/employees"], async (req, res) => {
+  try {
+    const { users } = await readDb();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to load employees" });
+  }
 });
 
 app.use("/api", apiRoutes);

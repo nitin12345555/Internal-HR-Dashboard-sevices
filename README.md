@@ -30,6 +30,9 @@ npm run dev
 
 The server will start on `http://localhost:4000`.
 
+## API Documentation
+A detailed frontend-ready API contract is available in [API_DOCUMENTATION.md](API_DOCUMENTATION.md).
+
 ---
 
 ## API Endpoints
