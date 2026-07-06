@@ -44,6 +44,23 @@ wss.on("connection", (ws) => {
 
 // --- Express App Setup ---
 app.use(cors({ origin: "http://localhost:3000" }));
+
+app.get("/", (req, res) => {
+  res.json({
+    name: "mock-job-api",
+    status: "running",
+    endpoints: {
+      api: "/api/tasks",
+      websocket: "/ws",
+      health: "/health",
+    },
+  });
+});
+
+app.get("/health", (req, res) => {
+  res.json({ status: "ok" });
+});
+
 app.use("/api", apiRoutes);
 
 server.listen(PORT, "0.0.0.0", () => {
