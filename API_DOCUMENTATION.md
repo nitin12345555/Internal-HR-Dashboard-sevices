@@ -1,93 +1,45 @@
 # Backend API Documentation
 
 ## Overview
-This backend is a mock Express.js service that provides:
-- REST endpoints for task data
-- Server-Sent Events (SSE) for task summaries
-- WebSocket updates for live events
+This mock backend is for the annotation activity console take-home exercise. It serves task data over REST, streams AI-style summaries over SSE, and pushes live updates over WebSocket.
 
-### Base URLs
+### Base URL
 - Local: http://localhost:4000
-- Production: https://internal-hr-dashboard-sevices-production.up.railway.app
+- When deployed: use your deployed host instead of localhost
 
-### Tech Stack
-- Node.js
-- Express.js
-- WebSocket (ws)
-- CORS enabled for frontend origins
-
----
-
-## 1. Health and Service Info
-
-### GET /
-Returns basic service information.
-
-#### Response
-```json
-{
-  "name": "mock-job-api",
-  "status": "running",
-  "endpoints": {
-    "api": "/api/tasks",
-    "websocket": "/ws",
-    "health": "/health"
-  }
-}
-```
-
-### GET /health
-Checks whether the server is healthy.
-
-#### Response
-```json
-{
-  "status": "ok"
-}
-```
-
-### GET /employee or GET /employees
-Returns the list of users/employees from the mock dataset.
-
-#### Response
-```json
-[
-  { "id": "u1", "name": "Nitin" },
-  { "id": "u2", "name": "Ben" },
-  { "id": "u3", "name": "Chloe" }
-]
-```
-
-### GET /api/employee or GET /api/employees
-Same as above, but under the API prefix.
+### Important notes for the frontend
+- The data is intentionally messy and should be normalized before display.
+- The summary stream contains untrusted markdown and raw HTML-like content. Render it safely.
+- Do not assume all fields are clean or consistent.
 
 ---
 
-## 2. Task API
-All task endpoints are under /api.
+## 1. REST API
 
 ### GET /api/tasks
 Returns a paginated list of tasks.
 
-#### Query Parameters
-- page: number, optional, default = 1
-- pageSize: number, optional, default = 10
+#### Query parameters
+- page: number, default 1
+- pageSize: number, default 20
+- type: optional filter string
+- status: optional filter string
 
 #### Response
 ```json
 {
   "page": 1,
-  "pageSize": 10,
-  "total": 50,
+  "pageSize": 20,
+  "total": 137,
   "items": [
     {
       "id": "t1",
-      "title": "Analyze customer feedback data",
+      "title": "Task 1",
       "type": "text",
       "status": "InProgress",
-      "assignee": { "id": "u1", "name": "Nitin" },
-      "annotationCount": "4",
-      "updatedAt": "2025-08-06T10:30:00Z",
+      "assignee": { "id": "u1", "name": "Asha" },
+      "annotationCount": 1,
+      "updatedAt": 1719600000000,
       "meta": { "priority": "high" }
     }
   ]
@@ -95,84 +47,78 @@ Returns a paginated list of tasks.
 ```
 
 ### GET /api/tasks/:id
-Returns a single task by ID.
+Returns one task by id.
 
 #### Example
 ```http
 GET /api/tasks/t1
 ```
 
-#### Success Response
+#### Response
 ```json
 {
   "id": "t1",
-  "title": "Analyze customer feedback data",
+  "title": "Task 1",
   "type": "text",
   "status": "InProgress",
-  "assignee": { "id": "u1", "name": "Nitin" },
-  "annotationCount": "4",
-  "updatedAt": "2025-08-06T10:30:00Z",
+  "assignee": { "id": "u1", "name": "Asha" },
+  "annotationCount": 1,
+  "updatedAt": 1719600000000,
   "meta": { "priority": "high" }
 }
 ```
 
-#### Error Response
+#### Error response
 ```json
 {
-  "message": "Task not found"
+  "error": "not found"
 }
 ```
 
 ### GET /api/tasks/:id/summary
-Streams a task summary using Server-Sent Events (SSE).
+Streams a task summary using Server-Sent Events.
 
 #### Example
 ```http
 GET /api/tasks/t1/summary
 ```
 
-#### Response Type
+#### Response type
 ```text
 text/event-stream
 ```
 
-#### Event Format
+#### Stream format
+Each chunk is sent as an SSE event with a `data:` payload.
+
 ```text
-data: Analyzing task details...
+data: "## Summary for t1\n\n"
 
-data: Generating a concise summary of the task.
-
-data: Done
+data: "This task is **in progress**.\n"
 ```
 
 ---
 
-## 3. WebSocket API
-The backend exposes a WebSocket endpoint at:
+## 2. WebSocket API
+Connect to:
 
 ```text
 ws://localhost:4000/ws
 ```
 
-For production, use:
-```text
-wss://internal-hr-dashboard-sevices-production.up.railway.app/ws
-```
+The server emits live events every few seconds.
 
-### Message Format
-The server sends JSON messages every 2 seconds:
-
+### Event shapes
 ```json
 {
   "kind": "task.updated",
   "payload": {
     "id": "t5",
-    "status": "Done"
+    "status": "done",
+    "updatedAt": 1719600000000
   }
 }
 ```
-
-or
 
 ```json
 {
@@ -184,103 +130,83 @@ or
 }
 ```
 
+```json
+{
+  "kind": "annotation.created",
+  "payload": {
+    "taskId": "t3",
+    "by": "u1",
+    "at": 1719600000000
+  }
+}
+```
+
 ---
 
-## 4. Data Models
+## 3. Data model expectations
 
 ### Task
 ```ts
 interface Task {
   id: string;
   title: string;
-  type: 'text' | 'image' | 'audio' | 'video';
+  type: string;
   status: string;
-  assignee: User | null;
+  assignee: { id: string; name: string } | null;
   annotationCount: string | number;
   updatedAt: string | number;
-  meta: {
-    priority: string;
-  };
+  meta: Record<string, unknown>;
 }
 ```
 
-### User
-```ts
-interface User {
-  id: string;
-  name: string;
-}
-```
+### Frontend normalization rules
+The backend data is intentionally inconsistent. The UI should normalize it before rendering:
+
+- `type` may include unknown values such as `video`
+- `status` may be mixed case or spelling, such as `in_progress`, `InProgress`, `done`, `todo`, `QA`, `BLOCKED`
+- `annotationCount` may be a string or a number
+- `updatedAt` may be an ISO string or an epoch timestamp in milliseconds
+- `assignee` may be null
+
+Suggested approach:
+- map status to a small enum such as `todo`, `in_progress`, `done`, `blocked`, `qa`
+- convert annotation count to a number
+- format timestamps into a readable date
+- show empty states when assignee is missing
 
 ---
 
-## 5. Important Frontend Notes
-The mock data is intentionally inconsistent to test UI normalization.
+## 4. Frontend requirements checklist
+The frontend should support:
 
-### Data inconsistencies to handle
-- status values may vary like:
-  - InProgress
-  - Todo
-  - Done
-  - QA
-  - BLOCKED
-  - lowercase variants such as in_progress, todo, done
-- annotationCount may be a string or number
-- updatedAt may be either:
-  - ISO string like "2025-08-06T10:30:00Z"
-  - Unix timestamp in milliseconds
-- assignee may be an object or null
-
-### Recommended frontend behavior
-- Normalize status values before displaying them
-- Convert annotationCount to a number for rendering
-- Format updatedAt into a readable date
-- Show empty states for null assignees or missing fields
-- Handle loading and error states for all requests
+1. Fetch and paginate tasks from `/api/tasks`
+2. Show a detailed view for a selected task from `/api/tasks/:id`
+3. Stream task summaries from `/api/tasks/:id/summary`
+4. Subscribe to live updates from `/ws`
+5. Handle loading, error, empty, and partial states clearly
+6. Render streamed markdown safely without executing injected HTML or scripts
 
 ---
 
-## 6. Frontend Requirements Checklist
-To build the UI against this backend, the frontend should support:
+## 5. Example calls
 
-1. Home or dashboard page
-   - Fetch tasks from GET /api/tasks
-   - Show a paginated task list
-
-2. Task detail view
-   - Fetch task details from GET /api/tasks/:id
-
-3. Task summary panel
-   - Open SSE connection to GET /api/tasks/:id/summary
-   - Render streamed text progressively
-
-4. Live updates
-   - Connect to the WebSocket endpoint /ws
-   - Listen for task update events and reflect them in the UI
-
-5. Error handling
-   - Show friendly messages for failed requests or missing tasks
-
----
-
-## 7. Example Frontend Integration Notes
 ### Fetch tasks
 ```js
-fetch('https://internal-hr-dashboard-sevices-production.up.railway.app/api/tasks?page=1&pageSize=10')
+fetch('http://localhost:4000/api/tasks?page=1&pageSize=20')
   .then((res) => res.json())
   .then((data) => console.log(data));
 ```
 
-### Fetch a single task
+### Fetch one task
 ```js
-fetch('https://internal-hr-dashboard-sevices-production.up.railway.app/api/tasks/t1')
+fetch('http://localhost:4000/api/tasks/t1')
   .then((res) => res.json())
   .then((data) => console.log(data));
 ```
 
-### Connect to SSE
+### Connect to SSE summary stream
 ```js
-const eventSource = new EventSource('https://internal-hr-dashboard-sevices-production.up.railway.app/api/tasks/t1/summary');
+const eventSource = new EventSource('http://localhost:4000/api/tasks/t1/summary');
 
 eventSource.onmessage = (event) => {
   console.log(event.data);
@@ -289,7 +215,7 @@ eventSource.onmessage = (event) => {
 
 ### Connect to WebSocket
 ```js
-const socket = new WebSocket('wss://internal-hr-dashboard-sevices-production.up.railway.app/ws');
+const socket = new WebSocket('ws://localhost:4000/ws');
 
 socket.onmessage = (event) => {
   console.log(JSON.parse(event.data));
