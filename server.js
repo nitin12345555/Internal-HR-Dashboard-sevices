@@ -43,7 +43,9 @@ wss.on("connection", (ws) => {
 });
 
 // --- Express App Setup ---
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(
+  cors({ origin: ["http://localhost:3000", "https://wwwtaskpluscom.vercel.app"] })
+);
 
 app.get("/", (req, res) => {
   res.json({
