@@ -8,8 +8,6 @@ const PORT = process.env.PORT || 4000;
 
 const app = express();
 const server = http.createServer(app);
-
-// --- WebSocket Server Setup ---
 const wss = new WebSocketServer({ server, path: "/ws" });
 
 const users = [
@@ -24,7 +22,6 @@ wss.on("connection", (ws) => {
   const intervalId = setInterval(() => {
     const kind = Math.random() > 0.5 ? "task.updated" : "task.assigned";
     const taskId = `t${Math.floor(Math.random() * 50) + 1}`;
-
     let payload;
     if (kind === "task.updated") {
       payload = { id: taskId, status: "Done" };
@@ -41,12 +38,9 @@ wss.on("connection", (ws) => {
     clearInterval(intervalId);
   });
 });
-
-// --- Express App Setup ---
 app.use(
   cors({ origin: ["http://localhost:3000", "https://wwwtaskpluscom.vercel.app"] })
 );
-
 app.get("/", (req, res) => {
   res.json({
     name: "mock-job-api",
@@ -58,13 +52,10 @@ app.get("/", (req, res) => {
     },
   });
 });
-
 app.get("/health", (req, res) => {
   res.json({ status: "ok" });
 });
-
 app.use("/api", apiRoutes);
-
 server.listen(PORT, "0.0.0.0", () => {
   console.log(`[server] HTTP and WebSocket server listening on port ${PORT}`);
 });
